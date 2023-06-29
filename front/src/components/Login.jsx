@@ -4,14 +4,19 @@ import * as faceapi from "face-api.js"
 import UseApi from "./UseApi"
 import Text from "./Text"
 import Button from "./Button"
+import Popup from "./Popup"
 import { makeClient } from "../services/makeClient"
 
 const Login = (props) => {
   const { saveJwt } = props
   const [image, setImage] = useState(null)
   const [error, setError] = useState("")
+  const [isVideo, setVideo] = useState(false)
   const videoRef = useRef(null)
   const picture_faces = UseApi([{}], "get", `/users`)
+  const [isLoading, setIsLoading] = useState(false)
+  const [showPopup, setShowPopup] = useState(false)
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms))
 
   const loadFaceApiModels = async () => {
     await Promise.all([
@@ -73,8 +78,8 @@ const Login = (props) => {
 
   const handleFormSubmit = async (image) => {
     try {
+      setIsLoading(true) // Active l'état de chargement
       const result = await compareImages(image)
-      console.log("RESULT = " + result)
       setError(null)
 
       const {
@@ -84,12 +89,16 @@ const Login = (props) => {
       if (!jwt) {
         throw new Error("Missing jwt")
       }
+      setShowPopup(true)
+      await delay(1500)
       saveJwt(jwt, userId)
       setError(null)
     } catch (err) {
       const { response: { data } = {} } = err
       console.log("ERROR = ", err.response.data.error)
       setError("Something went wrong...")
+    } finally {
+      setIsLoading(false) // Désactive l'état de chargement une fois terminé
     }
   }
 
@@ -112,6 +121,7 @@ const Login = (props) => {
 
   const startCamera = async () => {
     try {
+      setVideo(true)
       const stream = await navigator.mediaDevices.getUserMedia({ video: true })
       const video = videoRef.current
 
@@ -133,6 +143,22 @@ const Login = (props) => {
           <Row>
             <Col md={6}>
               <FormGroup>
+                {error && (
+                  <Popup
+                    btnMsg="Retry"
+                    isDisabled={false}
+                    msg={error}
+                    color="bg-red-400"
+                  />
+                )}
+                {showPopup && !error && (
+                  <Popup
+                    msg="Your account has been created 🎉"
+                    btnMsg="OK"
+                    isDisabled={true}
+                    color="bg-green-400"
+                  />
+                )}
                 <Media className="mt-4 ml-1" body>
                   {image === null ? (
                     <video ref={videoRef} autoPlay></video>
@@ -154,26 +180,19 @@ const Login = (props) => {
                         >
                           Start Camera
                         </Button>
-                        <Button
-                          variant="btnValidation"
-                          size="md"
-                          onClick={captureImage}
-                          className="mr-75"
-                          color="primary"
-                        >
-                          Capture
-                        </Button>
+                        {isVideo ? (
+                          <Button
+                            variant="btnValidation"
+                            size="md"
+                            onClick={captureImage}
+                            className="mr-75"
+                            color="primary"
+                          >
+                            Capture
+                          </Button>
+                        ) : null}
                       </div>
-                    ) : (
-                      <Button
-                        onClick={() => compareImages(image)}
-                        className="mr-75"
-                        size="sm"
-                        color="primary"
-                      >
-                        Compare
-                      </Button>
-                    )}
+                    ) : null}
                   </div>
                 </Media>
               </FormGroup>
@@ -182,9 +201,10 @@ const Login = (props) => {
           <Button
             variant="btnSubmit"
             size="lg"
+            disabled={!image}
             onClick={() => handleFormSubmit(image)}
           >
-            Submit
+            {isLoading ? "Loading..." : "Submit"}
           </Button>
         </CardBody>
       </Card>

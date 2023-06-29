@@ -14,7 +14,7 @@ const variants = {
   btnValidation:
     "w-full hover:scale-105 flex items-center justify-center mt-5 border border-transparent rounded-lg shadow-lg font-medium text-zinc-200 bg-yellow-600 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-700",
   btnSubmit:
-    "w-full hover:scale-110 flex items-center justify-center mt-5 border border-transparent rounded-lg shadow-lg font-medium text-zinc-200 bg-yellow-600 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-700",
+    "w-full hover:scale-110 flex items-center justify-center mt-5 border rounded-lg shadow-lg font-medium",
   btnDelete:
     "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900",
 }

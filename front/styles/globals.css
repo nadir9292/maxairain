@@ -15,23 +15,33 @@ body {
   position: relative;
 }
 
-h1 {
-  color: rgb(228 228 231);
-  font-weight: bold;
+.hover\:bg-yellow-600:hover {
+  background-color: #379ec1; /* Modifier la couleur en fonction de vos besoins */
 }
 
-/* Change Autocomplete styles in Chrome & Edge*/
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-  border: 1px solid transparent;
-  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
-  box-shadow: 0 0 0px 1000px transparent inset;
-  transition: background-color 5000s ease-in-out 0s;
+.focus\:outline-none:focus {
+  outline: none;
+}
+
+.focus\:ring-2:focus {
+  box-shadow: 0 0 0 3px rgba(255, 213, 0, 0.5); /* Modifier la couleur en fonction de vos besoins */
+}
+
+.focus\:ring-offset-2:focus {
+  outline-offset: 2px;
+}
+
+.focus\:ring-yellow-700:focus {
+  box-shadow: 0 0 0 3px rgba(252, 211, 77, 0.5); /* Modifier la couleur en fonction de vos besoins */
+}
+
+/* Styles pour le bouton désactivé */
+[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5; /* Modifier l'opacité en fonction de vos besoins */
+  pointer-events: none;
+}
+
+[disabled] .hover\:scale-110:hover {
+  transform: none;
 }
