@@ -57,8 +57,8 @@ const Stock = (props) => {
         <Popup
           btnMsg="Retry please 😕"
           isDisabled={false}
-          msg={error}
-          color="bg-red-400"
+          msg="Nice 🙂"
+          color="bg-green-400"
         />
       )}
       {showPopup && !error && (
