@@ -8,6 +8,7 @@ import { makeClient } from "../services/makeClient"
 const Stock = (props) => {
   const { userId } = props
   const items = UseApi([{}], "get", `/items`)
+  const itemByUser = UseApi([{}], "get", `/items/${userId}`)
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [showPopup, setShowPopup] = useState(false)
@@ -35,10 +36,6 @@ const Stock = (props) => {
         data: { jwt, userId },
       } = await makeClient().post(`/chooseItems/${uid}`, { itemsSelected })
 
-      if (!jwt) {
-        throw new Error("Missing jwt")
-      }
-
       setShowPopup(true)
       await delay(1500)
       setError(null)
@@ -55,7 +52,7 @@ const Stock = (props) => {
     <div className="grid md:grid-cols-2">
       {error && (
         <Popup
-          btnMsg="Retry please 😕"
+          btnMsg="OK 🙂"
           isDisabled={false}
           msg="Nice 🙂"
           color="bg-green-400"

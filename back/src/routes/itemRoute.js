@@ -93,6 +93,29 @@ const itemRoute = ({ app }) => {
     }
   })
 
+  //GET Items selected By A User
+  app.get("/items/:userId", async (req, res) => {
+    const {
+      params: { userId },
+    } = req
+
+    try {
+      const checkUser = await UserModel.findUserById(userId)
+
+      if (!checkUser) {
+        return res.status(403).send({ error: "User not found" })
+      }
+
+      const items = await UserItemModel.query()
+        .select("id_user", "id_item")
+        .where("id_user", userId)
+
+      res.send(items)
+    } catch (err) {
+      return res.status(401).send({ error: "Error : " + err })
+    }
+  })
+
   //POST request
   //CREATE New ITEM (only for admins)
   app.post("/:adminId/create-item", async (req, res) => {
