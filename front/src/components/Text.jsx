@@ -5,7 +5,7 @@ const className = "font-bold"
 const variants = {
   login_register:
     "text-maxAirain underline decoration-yellow-400 underline-offset-2 font-montserrat font-bold text-center mb-10",
-  nav_bar_text: "text-zinc-200 hover:text-zinc-300 text-center",
+  nav_bar_text: "text-gray-900  text-center",
   popup:
     "flex justify-center text-gray-900 font-semibold font-family: Consolas",
   info: "text-neutral-800 font-montserrat font-medium pt-2 mt-2 text-center",

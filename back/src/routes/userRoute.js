@@ -55,29 +55,23 @@ const userRoute = ({ app }) => {
   //CREATTE USER
   app.post("/:adminId/create-user", async (req, res) => {
     const {
-      body: { first_name, last_name, mail, role, post, picture_face },
+      body: { first_name, last_name, poste, picture_face },
       params: { adminId },
     } = req
 
     try {
-      const checkAdmin = await UserModel.findUserByIdAndRole(adminId, "admin")
+      //const checkAdmin = await UserModel.findUserByIdAndRole(adminId, "admin")
 
-      if (!checkAdmin) {
-        return res.status(403).send({ error: "forbidden" })
-      }
-
-      const user = await UserModel.findUserByMail(mail)
-
-      if (user) {
-        return res.status(401).send({ error: "your email already exists !" })
-      }
+      //if (!checkAdmin) {
+      //return res.status(403).send({ error: "forbidden" })
+      //}
 
       await UserModel.query().insertAndFetch({
         first_name,
         last_name,
-        mail,
-        role,
-        post,
+        role: "user",
+        post: poste,
+        mail: "toto",
         picture_face,
       })
 
@@ -88,23 +82,22 @@ const userRoute = ({ app }) => {
   })
 
   //LOGIN
-  app.post("/login", async ({ body: { picture_face } }, res) => {
+  app.post("/login", async ({ body: { result } }, res) => {
     try {
-      const user = await UserModel.findUserById(1)
+      if (result) {
+        const user = await UserModel.findUserById(result)
+        const userId = user.id
 
-      if (!user.checkPassword()) {
-        return res.status(401).send({ error: "Bad password !" })
+        const jwt = jsonwebtoken.sign(
+          { payload: { userId: user.id } },
+          config.security.session.secret,
+          { expiresIn: config.security.session.expiresIn }
+        )
+
+        return res.send({ userId, jwt })
+      } else {
+        return res.status(403).send({ error: "User don't found" })
       }
-
-      const userId = user.id
-
-      const jwt = jsonwebtoken.sign(
-        { payload: { userId: user.id } },
-        config.security.session.secret,
-        { expiresIn: config.security.session.expiresIn }
-      )
-
-      return res.send({ userId, jwt })
     } catch (err) {
       return res.status(500).send({ error: "Internal server error : " + err })
     }

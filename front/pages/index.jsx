@@ -2,17 +2,35 @@ import { useContext } from "react"
 import { AppContext } from "../src/components/AppContext"
 import NavBar from "../src/components/NavBar"
 import { motion } from "framer-motion"
-import CreateUser from "../src/components/CreateUser"
+import Login from "../src/components/Login"
+import UseApi from "../src/components/UseApi"
 
 const Home = () => {
-  const { jwt, logout, userId, saveUser, user } = useContext(AppContext)
+  const { jwt, logout, userId, saveJwt, user, saveUser } =
+    useContext(AppContext)
+  if (userId) {
+    const user = UseApi({}, "get", `/users/${userId}`)
+    if (user) {
+      saveUser(
+        JSON.stringify({
+          id: user.id,
+          firstName: user.first_name,
+          lastName: user.last_name,
+          pictureFace: user.picture_face,
+          role: user.role,
+        })
+      )
+    }
+  }
 
   return (
     <div className="bg-mobile bg-cover md:bg-normal md:bg-cover h-screen">
       <NavBar
         jwt={jwt}
         logout={logout}
-        pseudo={user ? JSON.parse(user).pseudo : null}
+        role={user ? JSON.parse(user).role : null}
+        pseudo={user ? JSON.parse(user).firstName : null}
+        pictureFace={user ? JSON.parse(user).pictureFace : null}
       />
       <div className="flex justify-center mt-10">
         <motion.ul
@@ -22,7 +40,11 @@ const Home = () => {
           variants={list}
         >
           <motion.li variants={item}>
-            <CreateUser />
+            {userId ? (
+              <h1>STOCK</h1>
+            ) : (
+              <Login jwt={jwt} logout={logout} saveJwt={saveJwt} />
+            )}
           </motion.li>
         </motion.ul>
       </div>

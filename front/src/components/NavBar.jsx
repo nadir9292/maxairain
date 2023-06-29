@@ -1,16 +1,13 @@
 import { Disclosure, Menu } from "@headlessui/react"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
-import Button from "./Button"
+import Text from "./Text"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
-const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Stock", href: "/stock" },
-]
+const navigation = [{ name: "Home", href: "/" }]
 
 const NavBar = (props) => {
-  const { jwt, logout, pseudo } = props
+  const { jwt, logout, pseudo, pictureFace, role } = props
   const [isLoggedIn, setIsLoggedIn] = useState(jwt)
   useEffect(() => {
     setIsLoggedIn(jwt)
@@ -33,7 +30,7 @@ const NavBar = (props) => {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1items-center justify-center sm:items-stretch sm:justify-end">
+              <div className="flex flex-items-center justify-center sm:items-stretch sm:justify-end">
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4 bg-zinc-100 px-10 py-2 rounded-xl">
                     {navigation.map((item) => (
@@ -45,37 +42,48 @@ const NavBar = (props) => {
                         {item.name}
                       </a>
                     ))}
+                    {role === "admin" ? (
+                      <a
+                        href="/createUser"
+                        className="text-neutral-800 font-montserrat rounded-md px-3 py-2 text-lg font-bold hover:scale-110"
+                      >
+                        CREATE USER
+                      </a>
+                    ) : (
+                      <h1></h1>
+                    )}
                   </div>
                 </div>
               </div>
               {/* Profile dropdown */}
-              <Menu as="div" className="relative ml-5 ">
+              <Menu as="div" className="relative ml-5">
                 {isLoggedIn ? (
-                  <div>
+                  <div className="grid grid-cols-3 item-center">
+                    <Text variant="card_title" size="lg">
+                      ({role})
+                    </Text>
                     {pseudo && (
-                      <Link
-                        className="font-montserrat text-lg md:text-2xl text-zinc-100 md:text-neutral-800 px-4 py-4 rounded-xl hover:scale-110"
-                        href="/"
-                      >
-                        {pseudo}
-                      </Link>
+                      <div className="flex-shrink-0">
+                        <img
+                          className="h-16 w-16"
+                          src={pictureFace}
+                          alt="Your Company"
+                        />
+                      </div>
                     )}
-                    <Button variant="secondary" size="lg" onClick={logout}>
+                    <button
+                      type="button"
+                      onClick={logout}
+                      className="rounded-full bg-gray-800 p-1 text-gray-400 text-xl"
+                    >
                       ❌
-                    </Button>
+                    </button>
                   </div>
                 ) : (
                   <div>
-                    <Link href="/login">
-                      <Button variant="navBar" size="lg">
-                        LOGIN
-                      </Button>
-                    </Link>
-                    <Link href="/create-user">
-                      <Button variant="navBar" size="lg">
-                        CREATE USER
-                      </Button>
-                    </Link>
+                    <Text variant="card_title" size="lg">
+                      Vous devez vous connecter
+                    </Text>
                   </div>
                 )}
               </Menu>
