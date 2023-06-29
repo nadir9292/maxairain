@@ -134,7 +134,7 @@ const Login = (props) => {
   }
 
   return (
-    <div className="container bg-red-200 p-5">
+    <div className="container border border-2 border-gray-900 rounded p-5 mb-5 mx-2">
       <Text variant="login_register" size="xl">
         Login
       </Text>
@@ -145,7 +145,7 @@ const Login = (props) => {
               <FormGroup>
                 {error && (
                   <Popup
-                    btnMsg="Retry"
+                    btnMsg="Retry please 😕"
                     isDisabled={false}
                     msg={error}
                     color="bg-red-400"
@@ -153,7 +153,7 @@ const Login = (props) => {
                 )}
                 {showPopup && !error && (
                   <Popup
-                    msg="Your account has been created 🎉"
+                    msg="Welcome 🙂"
                     btnMsg="OK"
                     isDisabled={true}
                     color="bg-green-400"

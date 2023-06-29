@@ -4,24 +4,23 @@ const className = "font-bold"
 
 const variants = {
   login_register:
-    "text-maxAirain underline decoration-yellow-400 underline-offset-2 font-montserrat font-bold text-center mb-10",
-  nav_bar_text: "text-gray-900  text-center",
-  popup:
-    "flex justify-center text-gray-900 font-semibold font-family: Consolas",
-  info: "text-neutral-800 font-montserrat font-medium pt-2 mt-2 text-center",
-  link: "underline underline-offset-2 text-yellow-500 font-semibold font-montserrat",
+    "text-maxAirain font-roboto underline decoration-yellow-400 underline-offset-2 font-bold text-center mb-10",
+  nav_bar_text: "text-gray-900 font-roboto text-center",
+  popup: "flex justify-center text-gray-900 font-semibold font-roboto",
+  info: "text-neutral-800 font-roboto font-medium pt-2 mt-2 text-center",
+  link: "underline underline-offset-2 text-yellow-500 font-semibold font-roboto",
   victory_text: "",
   loose_text: "",
-  card_name: "text-amber-500 font-bold text-left",
-  card_title: "text-maxAirain font-montserrat font-bold text-center",
-  card_category: "text-zinc-200 text-left",
-  card_price: "text-zinc-200 text-left",
-  card_rating: "text-zinc-200 text-center",
-  detail_name: "text-amber-500 font-bold text-left",
-  detail_category: "text-zinc-200 text-left my-2",
-  detail_description: "text-zinc-200 text-left mt-5",
-  detail_price: "text-zinc-200 text-left",
-  detail_rating: "text-zinc-200 text-center",
+  card_name: "text-amber-500 font-roboto font-bold text-left",
+  card_title: "text-maxAirain font-roboto  font-bold text-center mt-3 mx-2",
+  items: "text-red-200 text-left font-roboto text-zinc-200 mx-2 my-3",
+  card_price: "text-zinc-200 font-roboto text-left",
+  card_rating: "text-zinc-200 text-center font-roboto",
+  detail_name: "text-amber-500 font-bold text-left font-roboto",
+  detail_category: "text-zinc-200 text-left my-2 font-roboto",
+  detail_description: "text-zinc-200 text-left mt-5 font-roboto",
+  detail_price: "text-zinc-200 text-left font-roboto",
+  detail_rating: "text-zinc-200 text-center font-roboto",
 }
 
 const sizes = {

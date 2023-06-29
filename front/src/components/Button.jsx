@@ -12,9 +12,9 @@ const variants = {
   classicAnswer:
     "inline-flex items-center font-montserrat bg-zinc-100 rounded-full shadow-lg w-64 sm:w-96 h-16 text-md md:text-lg",
   btnValidation:
-    "w-full hover:scale-105 flex items-center justify-center mt-5 border border-transparent rounded-lg shadow-lg font-medium text-zinc-200 bg-yellow-600 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-700",
+    "w-full hover:scale-105 flex items-center justify-center mt-5 border border-transparent rounded-lg shadow-lg font-medium text-zinc-200 bg-maxAirain hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-700",
   btnSubmit:
-    "w-full hover:scale-110 flex items-center justify-center mt-5 border rounded-lg shadow-lg font-medium",
+    "w-full hover:scale-105 bg-maxAirain flex items-center justify-center mt-5 border border-transparent rounded-lg shadow-lg font-medium hover:bg-blue-900",
   btnDelete:
     "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900",
 }

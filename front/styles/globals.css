@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 html,
-body {
-  background-color: #f0f3ec;
+body,
+#__next {
+  @apply min-h-full;
+  background-color: #ebeef4;
   background-repeat: no-repeat;
   background-size: auto;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
 }
 
 body {

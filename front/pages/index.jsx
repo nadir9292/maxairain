@@ -4,6 +4,7 @@ import NavBar from "../src/components/NavBar"
 import { motion } from "framer-motion"
 import Login from "../src/components/Login"
 import UseApi from "../src/components/UseApi"
+import Stock from "../src/components/Stock"
 
 const Home = () => {
   const { jwt, logout, userId, saveJwt, user, saveUser } =
@@ -41,7 +42,7 @@ const Home = () => {
         >
           <motion.li variants={item}>
             {userId ? (
-              <h1>STOCK</h1>
+              <Stock userId={userId} />
             ) : (
               <Login jwt={jwt} logout={logout} saveJwt={saveJwt} />
             )}
