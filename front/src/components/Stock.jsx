@@ -21,7 +21,7 @@ const Stock = (props) => {
     }
   }
 
-  const handleButtonClick = async (uId) => {
+  const handleButtonClick = async (uid) => {
     try {
       setIsLoading(true)
       setError(null)
@@ -33,7 +33,7 @@ const Stock = (props) => {
 
       const {
         data: { jwt, userId },
-      } = await makeClient().post(`/chooseItems/3`, { itemsSelected })
+      } = await makeClient().post(`/chooseItems/${uid}`, { itemsSelected })
 
       if (!jwt) {
         throw new Error("Missing jwt")
@@ -89,7 +89,11 @@ const Stock = (props) => {
           </label>
         </div>
       ))}
-      <Button variant="btnSubmit" size="lg" onClick={handleButtonClick}>
+      <Button
+        variant="btnSubmit"
+        size="lg"
+        onClick={() => handleButtonClick(userId)}
+      >
         Valider
       </Button>
       <p className="mb-5"></p>
