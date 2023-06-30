@@ -182,7 +182,7 @@ const CreateUser = () => {
                     )}
                     {showPopup && !error && (
                       <Popup
-                        msg="Welcome 🙂"
+                        msg=""
                         btnMsg="OK"
                         isDisabled={true}
                         color="bg-green-400"
@@ -192,7 +192,7 @@ const CreateUser = () => {
                       className="block text-md m-1 font-medium leading-6 text-gray-900"
                       for="first_name"
                     >
-                      Prénom
+                      First name
                     </Label>
                     <Input
                       defaultValue={first_name}
@@ -210,7 +210,7 @@ const CreateUser = () => {
                       className="block text-md m-1 font-medium leading-6 text-gray-900"
                       for="last_name"
                     >
-                      Nom
+                      Last name
                     </Label>
                     <Input
                       defaultValue={last_name}
@@ -230,7 +230,7 @@ const CreateUser = () => {
                       className="block text-md m-1  font-medium leading-6 text-gray-900"
                       for="poste"
                     >
-                      Poste
+                      Job
                     </Label>
                     <Input
                       defaultValue={poste}

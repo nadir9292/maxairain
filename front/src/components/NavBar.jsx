@@ -86,9 +86,7 @@ const NavBar = (props) => {
                   </div>
                 ) : (
                   <div>
-                    <Text variant="card_title" size="lg">
-                      Vous devez vous connecter
-                    </Text>
+                    <Text variant="card_title" size="lg"></Text>
                   </div>
                 )}
               </Menu>
